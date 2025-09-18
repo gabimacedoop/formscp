@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FORMULÁRIO - ANÁLISE DE COLORAÇÃO PESSOAL (ONLINE)</title><style>
+  <title>ANÁLISE DE COLORAÇÃO PESSOAL (ONLINE) - @gabrielamacedocores</title><style>
     /* Fonte Inter offline: usa apenas fontes locais, sem chamadas de rede */
     @font-face {
       font-family: 'Inter';
@@ -49,6 +49,9 @@
       color: var(--fg);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10+ */
+      user-select: none; /* Padrão */
     }
 
     .container {
@@ -57,7 +60,7 @@
       padding: 24px 16px 64px;
     }
     main.container {
-        padding-top: 0;
+        padding-top: 20px;
     }
     
     /* Estilo do Cabeçalho Rosa */
@@ -65,7 +68,7 @@
         background-color: var(--header-bg);
         color: white;
         margin: -24px -16px 28px -16px;
-        padding: 24px 32px;
+        padding: 24px 16px;
         text-align: center; /* Centralizado */
         display: flex;
         flex-direction: column;
@@ -75,6 +78,7 @@
      .main-header-wrapper header {
         max-width: var(--maxw);
         width: 100%;
+        padding: 0; /* Remove padding extra do container */
     }
     .main-header-wrapper .title {
         color: white;
@@ -175,6 +179,12 @@
     }
     textarea {
         height: 50px;
+    }
+    select {
+        color: var(--fg);
+    }
+    select:invalid {
+        color: #9aa0a6;
     }
 
     input::placeholder, textarea::placeholder {
@@ -338,16 +348,61 @@
     }
     
     /* Novo Estilo do Rodapé */
-    .main-footer {
-        padding: 32px 16px;
-        text-align: center;
-        font-size: 10px;
-        color: var(--muted);
-        border-top: 1px solid var(--border);
-        margin-top: 40px;
+    .main-footer, #resultPage {
+        -webkit-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
     }
     .main-footer p {
         margin: 4px 0;
+    }
+
+    img {
+        -webkit-user-drag: none;
+        user-drag: none;
+    }
+
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        backdrop-filter: blur(2px);
+    }
+    .modal-content {
+        background: white;
+        padding: 24px;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .modal-content h3 {
+        margin-top: 0;
+        font-size: 18px;
+        color: var(--fg);
+    }
+    .modal-content p {
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--muted);
+        margin-bottom: 20px;
+    }
+    .modal-close-btn {
+        background: var(--header-bg);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
     }
 
 
@@ -361,7 +416,7 @@
 </head>
 <body>
   <div class="main-header-wrapper">
-    <header>
+    <header class="container">
       <h1 class="title">ANÁLISE DE COLORAÇÃO PESSOAL (ONLINE)</h1>
       <p class="lead">GABRIELA MACEDO - COLORAÇÃO PESSOAL<br><strong>@gabrielamacedocores</strong></p>
     </header>
@@ -644,6 +699,7 @@
               <div class="field">
                 <span class="question">É a primeira vez que você faz análise de coloração pessoal?<span class="required-asterisk">*</span></span>
                 <div class="options" role="group">
+                  <label class="option"><input type="radio" name="primeira_vez" value="É a primeira vez que faço coloração pessoal." required /><span>É a primeira vez que faço coloração pessoal.</span></label>
                   <label class="option"><input type="radio" name="primeira_vez" value="Já fiz coloração anteriormente com outra profissional." /><span>Já fiz coloração anteriormente com outra profissional.</span></label>
                   <label class="option"><input type="radio" name="primeira_vez" value="Já fiz coloração em sites e/ou aplicativos com IA." /><span>Já fiz coloração em sites e/ou aplicativos com IA.</span></label>
                   <label class="option"><input type="radio" name="primeira_vez" value="Nunca fiz coloração pessoal." /><span>Nunca fiz coloração pessoal.</span></label>
@@ -658,6 +714,7 @@
                 <div class="options" role="group">
                   <label class="option"><input type="radio" name="quanto_sabe" value="Não sei quase nada, sou iniciante." required/><span>Não sei quase nada, sou iniciante.</span></label>
                   <label class="option"><input type="radio" name="quanto_sabe" value="Já ouvi falar e conheço o básico." /><span>Já ouvi falar e conheço o básico.</span></label>
+                  <label class="option"><input type="radio" name="quanto_sabe" value="Já pesquisei bastante sobre o assunto." /><span>Já pesquisei bastante sobre o assunto.</span></label>
                   <label class="option"><input type="radio" name="quanto_sabe" value="Tenho um bom conhecimento sobre o tema." /><span>Tenho um bom conhecimento sobre o tema.</span></label>
                   <label class="option"><input type="radio" name="quanto_sabe" value="Outro" data-outro-target="#outroQuantoSabe" /><span>Outro</span></label>
                 </div>
@@ -709,6 +766,14 @@
       <p><strong>GABRIELA MACEDO | @gabrielamacedocores</strong></p>
       <p>CNPJ 55.495.465/0001-52</p>
   </footer>
+
+  <div id="plagiarismModal" class="modal-overlay hidden">
+    <div class="modal-content">
+        <h3>Aviso Legal</h3>
+        <p>Este conteúdo é protegido por direitos autorais. A cópia ou reprodução não autorizada, total ou parcial, configura crime de plágio conforme a Lei nº 9.610/98.</p>
+        <button id="modalCloseBtn" class="modal-close-btn">Entendi</button>
+    </div>
+</div>
 
 
   <script>
@@ -1131,6 +1196,22 @@
             checkColorConflict();
         }
     });
+    
+    // Proteção contra Cópia
+    const plagiarismModal = document.getElementById('plagiarismModal');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+
+    document.addEventListener('contextmenu', function(e) {
+        if (resultPage.contains(e.target) || e.target.closest('#resultPage')) {
+            return;
+        }
+        e.preventDefault();
+        plagiarismModal.classList.remove('hidden');
+    });
+
+    modalCloseBtn.addEventListener('click', () => {
+        plagiarismModal.classList.add('hidden');
+    });
 
     document.addEventListener('DOMContentLoaded', () => {
         loadDraft();
@@ -1153,5 +1234,4 @@
   </script>
 </body>
 </html>
-
 
