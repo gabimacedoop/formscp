@@ -14,7 +14,7 @@
     }
 :root {
       --bg: #ffffff;
-      --fg: #111111;
+      --fg: #222222;
       --muted: #666666;
       --border: #e5e5e5;
       /* Cores */
@@ -49,9 +49,6 @@
       color: var(--fg);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      -webkit-user-select: none; /* Safari */
-      -ms-user-select: none; /* IE 10+ */
-      user-select: none; /* Padrão */
     }
 
     .container {
@@ -180,12 +177,6 @@
     textarea {
         height: 50px;
     }
-    select {
-        color: var(--fg);
-    }
-    select:invalid {
-        color: #9aa0a6;
-    }
 
     input::placeholder, textarea::placeholder {
         color: #9aa0a6;
@@ -240,9 +231,9 @@
     .primary:active { transform: translateY(1px); }
     .primary[disabled] { opacity: .6; cursor: not-allowed; background-color: var(--accent); }
 
-    .outline { background: #fff; color: var(--fg); border: 1px solid var(--border); }
+    .outline { background: #fff; color: var(--fg); border: 1px solid var(--border); font-weight: 700; }
     .outline:hover { background-color: #f5f5f5; }
-    .link { background: transparent; border: none; color: var(--fg); padding: 8px 0; cursor: pointer; text-decoration: underline; font-size: var(--fs-text); }
+    .link { background: transparent; border: none; color: var(--fg); padding: 8px 0; cursor: pointer; text-decoration: underline; font-size: var(--fs-text); font-weight: 700; }
     .success { color: #0a7d26; }
     .hidden { display: none; }
 
@@ -322,7 +313,7 @@
         font-size: 10px;
         font-weight: bold;
         color: var(--fg);
-        line-height: 1;
+        line-height: 1.2;
         pointer-events: none;
     }
     .navigation-buttons {
@@ -348,69 +339,35 @@
     }
     
     /* Novo Estilo do Rodapé */
-    .main-footer, #resultPage {
-        -webkit-user-select: text;
-        -ms-user-select: text;
-        user-select: text;
+    .main-footer {
+        padding: 32px 16px;
+        text-align: center;
+        font-size: 10px;
+        color: var(--muted);
+        border-top: 1px solid var(--border);
+        margin-top: 40px;
     }
     .main-footer p {
         margin: 4px 0;
     }
 
-    img {
-        -webkit-user-drag: none;
-        user-drag: none;
-    }
-
-    .modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        backdrop-filter: blur(2px);
-    }
-    .modal-content {
-        background: white;
-        padding: 24px;
-        border-radius: 8px;
-        max-width: 400px;
-        width: 90%;
+    #resultPage .subtitle, #resultPage .legend {
         text-align: center;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-    .modal-content h3 {
-        margin-top: 0;
-        font-size: 18px;
-        color: var(--fg);
+    #resultPage .legend {
+        font-size: 15px;
+        line-height: 1.2;
     }
-    .modal-content p {
-        font-size: 14px;
-        line-height: 1.5;
-        color: var(--muted);
-        margin-bottom: 20px;
+    .desktop-break {
+        display: none;
     }
-    .modal-close-btn {
-        background: var(--header-bg);
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
 
     @media (min-width: 820px) {
       .card { padding: 0; }
       .image-grid { grid-template-columns: repeat(5, 1fr); }
       .main-header-wrapper .title { font-size: 30px; }
       .main-header-wrapper { padding: 32px 64px; }
+      .desktop-break { display: block; }
     }
   </style>
 </head>
@@ -515,7 +472,7 @@
                 <span class="question">Quais cores você mais <strong class="gosta-label">GOSTA</strong> de usar?<span class="required-asterisk">*</span></span>
                 <p class="legend">Ou seja, quais dessas você se sente melhor, você mais encontra em seu guarda roupa?</p>
                 <div class="image-grid" role="group" id="gostaGrid">
-                    <label class="image-option-label"><input type="checkbox" name="cores_armario" value="Preto"><div class="image-option-content"><div class="color-swatch" style="background-color: #000000;"></div></div><span class="option-name">PRETO</span></label>
+                    <label class="image-option-label"><input type="checkbox" name="cores_armario" value="Preto"><div class="image-option-content"><div class="color-swatch" style="background-color: #222222;"></div></div><span class="option-name">PRETO</span></label>
                     <label class="image-option-label"><input type="checkbox" name="cores_armario" value="Branco"><div class="image-option-content"><div class="color-swatch" style="background-color: #FFFFFF; border: 1px solid #ddd;"></div></div><span class="option-name">BRANCO</span></label>
                     <label class="image-option-label"><input type="checkbox" name="cores_armario" value="Amarelo Gema"><div class="image-option-content"><div class="color-swatch" style="background-color: #F8D568;"></div></div><span class="option-name">AMARELO GEMA</span></label>
                     <label class="image-option-label"><input type="checkbox" name="cores_armario" value="Amarelo Lima"><div class="image-option-content"><div class="color-swatch" style="background-color: #D4DD4F;"></div></div><span class="option-name">AMARELO LIMA</span></label>
@@ -548,7 +505,7 @@
                 <span class="question">Quais cores você <strong class="nao-gosta-label">NÃO GOSTA</strong> de usar?<span class="required-asterisk">*</span></span>
                 <p class="legend">Ou seja, quais dessas você não se sente bem, não tem essa cor, não usa ou, acha que não te favorece?</p>
                 <div class="image-grid" role="group" id="naoGostaGrid">
-                    <label class="image-option-label"><input type="checkbox" name="cores_nao_gosta" value="Preto"><div class="image-option-content"><div class="color-swatch" style="background-color: #000000;"></div></div><span class="option-name">PRETO</span></label>
+                    <label class="image-option-label"><input type="checkbox" name="cores_nao_gosta" value="Preto"><div class="image-option-content"><div class="color-swatch" style="background-color: #222222;"></div></div><span class="option-name">PRETO</span></label>
                     <label class="image-option-label"><input type="checkbox" name="cores_nao_gosta" value="Branco"><div class="image-option-content"><div class="color-swatch" style="background-color: #FFFFFF; border: 1px solid #ddd;"></div></div><span class="option-name">BRANCO</span></label>
                     <label class="image-option-label"><input type="checkbox" name="cores_nao_gosta" value="Amarelo Gema"><div class="image-option-content"><div class="color-swatch" style="background-color: #F8D568;"></div></div><span class="option-name">AMARELO GEMA</span></label>
                     <label class="image-option-label"><input type="checkbox" name="cores_nao_gosta" value="Amarelo Lima"><div class="image-option-content"><div class="color-swatch" style="background-color: #D4DD4F;"></div></div><span class="option-name">AMARELO LIMA</span></label>
@@ -702,7 +659,6 @@
                   <label class="option"><input type="radio" name="primeira_vez" value="É a primeira vez que faço coloração pessoal." required /><span>É a primeira vez que faço coloração pessoal.</span></label>
                   <label class="option"><input type="radio" name="primeira_vez" value="Já fiz coloração anteriormente com outra profissional." /><span>Já fiz coloração anteriormente com outra profissional.</span></label>
                   <label class="option"><input type="radio" name="primeira_vez" value="Já fiz coloração em sites e/ou aplicativos com IA." /><span>Já fiz coloração em sites e/ou aplicativos com IA.</span></label>
-                  <label class="option"><input type="radio" name="primeira_vez" value="Nunca fiz coloração pessoal." /><span>Nunca fiz coloração pessoal.</span></label>
                   <label class="option"><input type="radio" name="primeira_vez" value="Outro" data-outro-target="#outroPrimeiraVez" /><span>Outro</span></label>
                 </div>
                 <div id="outroPrimeiraVez" class="outro-input-container hidden">
@@ -715,12 +671,15 @@
                   <label class="option"><input type="radio" name="quanto_sabe" value="Não sei quase nada, sou iniciante." required/><span>Não sei quase nada, sou iniciante.</span></label>
                   <label class="option"><input type="radio" name="quanto_sabe" value="Já ouvi falar e conheço o básico." /><span>Já ouvi falar e conheço o básico.</span></label>
                   <label class="option"><input type="radio" name="quanto_sabe" value="Já pesquisei bastante sobre o assunto." /><span>Já pesquisei bastante sobre o assunto.</span></label>
-                  <label class="option"><input type="radio" name="quanto_sabe" value="Tenho um bom conhecimento sobre o tema." /><span>Tenho um bom conhecimento sobre o tema.</span></label>
                   <label class="option"><input type="radio" name="quanto_sabe" value="Outro" data-outro-target="#outroQuantoSabe" /><span>Outro</span></label>
                 </div>
                  <div id="outroQuantoSabe" class="outro-input-container hidden">
                   <input type="text" name="quanto_sabe_outro" placeholder="Por favor, especifique" />
                 </div>
+              </div>
+               <div class="field">
+                <label class="question" for="suspeita_cartela">Você suspeita e/ou se identifica de alguma cartela específica? Se sim, porque?</label>
+                <textarea id="suspeita_cartela" name="suspeita_cartela" rows="3" placeholder="Conte aqui"></textarea>
               </div>
               <div class="field">
                 <span class="question">Você é consultora de imagem ou tem interesse em trabalhar nessa área?<span class="required-asterisk">*</span></span>
@@ -732,6 +691,10 @@
                 <div id="outroConsultora" class="outro-input-container hidden">
                   <input type="text" name="consultora_interesse_outro" placeholder="Por favor, especifique" />
                 </div>
+              </div>
+               <div class="field">
+                <label class="question" for="observacoes">Outras observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="3" placeholder="Escreva aqui se houver algo mais que queira adicionar."></textarea>
               </div>
             </div>
         </div>
@@ -745,8 +708,8 @@
 
     <!-- PÁGINA DE RESULTADO -->
     <section id="resultPage" class="card hidden" aria-live="polite">
-       <h2 class="subtitle">RESPOSTAS</h2>
-      <p class="legend">Tudo pronto! Agora clique no botão COPIAR RESPOSTAS para copiar o texto abaixo e me envie no WhatsApp.</p>
+       <h2 class="subtitle">SEU FORMULÁRIO FOI GERADO!</h2>
+      <p class="legend">Tudo pronto! Agora clique no botão <strong>COPIAR RESPOSTAS</strong> para copiar o texto abaixo e me envie no WhatsApp.</p>
       <pre id="resultText"> </pre>
       <div class="navigation-buttons result-buttons" style="border-top: none; padding-top: 12px;">
         <button id="copyBtn" class="primary outline" type="button">COPIAR RESPOSTAS</button>
@@ -766,14 +729,6 @@
       <p><strong>GABRIELA MACEDO | @gabrielamacedocores</strong></p>
       <p>CNPJ 55.495.465/0001-52</p>
   </footer>
-
-  <div id="plagiarismModal" class="modal-overlay hidden">
-    <div class="modal-content">
-        <h3>Aviso Legal</h3>
-        <p>Este conteúdo é protegido por direitos autorais. A cópia ou reprodução não autorizada, total ou parcial, configura crime de plágio conforme a Lei nº 9.610/98.</p>
-        <button id="modalCloseBtn" class="modal-close-btn">Entendi</button>
-    </div>
-</div>
 
 
   <script>
@@ -850,15 +805,15 @@
         const fd = new FormData(formEl);
         const groups = {};
         for (const [key, value] of fd.entries()) {
-            if (value.trim() !== "") { // Ignora valores vazios
+            if (value.trim() !== "") {
                 if (!groups[key]) groups[key] = [];
                 groups[key].push(value);
             }
         }
 
-        const lines = ['*ANÁLISE DE COLORAÇÃO PESSOAL (ONLINE)*', ''];
+        const lines = ['ANÁLISE DE COLORAÇÃO PESSOAL (ONLINE) - FORMULÁRIO', ''];
 
-        // Bloco 1: Informações Pessoais
+        // Bloco 1
         if (groups.nome) lines.push(groups.nome[0]);
         if (groups.instagram) {
             let username = groups.instagram[0].trim().replace(/^@/, '').replace(/^(https?:\/\/)?(www\.)?instagram\.com\//, '');
@@ -872,10 +827,15 @@
             lines.push(value);
         }
         if (groups.faixa_etaria) lines.push(groups.faixa_etaria[0]);
-        
         lines.push('');
 
-        // Bloco 2: Cores e Metais
+        // Bloco 2
+        if(groups.pref_cores_ousadia) {
+            let value = groups.pref_cores_ousadia[0];
+            if (value === 'Outro' && groups.pref_cores_ousadia_outro) value = groups.pref_cores_ousadia_outro[0];
+            lines.push(`SOBRE CORES: ${value}`);
+        }
+        
         let gosta = [];
         if(groups.cores_armario) gosta.push(...groups.cores_armario.filter(v => v !== 'Outro'));
         if(groups.cores_armario_outro) gosta.push(groups.cores_armario_outro[0]);
@@ -896,9 +856,9 @@
 
         lines.push('');
         
-        // Bloco 3: Características
+        // Bloco 3
         const olhos = groups.olhos_cor_natural_outro ? groups.olhos_cor_natural_outro[0] : (groups.olhos_cor_natural ? groups.olhos_cor_natural[0] : null);
-        if(olhos && olhos !== 'Outro') lines.push(`OLHOS: ${olhos}`);
+        if(olhos && olhos !== 'Outro') lines.push(`COR DOS OLHOS: ${olhos}`);
 
         const cabeloNatural = groups.cabelo_cor_natural_outro ? groups.cabelo_cor_natural_outro[0] : (groups.cabelo_cor_natural ? groups.cabelo_cor_natural[0] : null);
         if(cabeloNatural && cabeloNatural !== 'Outro') lines.push(`CABELO NATURAL: ${cabeloNatural}`);
@@ -908,34 +868,44 @@
             lines.push('CABELO ATUAL: Natural');
         } else if (groups.cabelo_cor_atual) {
             lines.push(`CABELO ATUAL: ${groups.cabelo_cor_atual[0]}`);
+        } else if (cabeloColoracaoStatus === 'Outro' && groups.cabelo_tem_coloracao_outro) {
+             lines.push(`CABELO ATUAL: ${groups.cabelo_tem_coloracao_outro[0]}`);
+        } else if (cabeloColoracaoStatus) {
+             lines.push(`CABELO ATUAL: ${cabeloColoracaoStatus}`);
         }
+        
         
         const pele = groups.pele_sol_outro ? groups.pele_sol_outro[0] : (groups.pele_sol ? groups.pele_sol[0] : null);
         if (pele && pele !== 'Outro') lines.push(`PELE: ${pele}`);
 
         if (groups.procedimentos && groups.procedimentos.length > 0) {
             let value = groups.procedimentos.filter(v => v !== 'Outro' && v !== 'Nenhuma das alternativas');
-            if (groups.procedimentos.includes('Outro') && groups.procedimentos_outro) {
-                value.push(groups.procedimentos_outro[0]);
-            }
-             if (value.length > 0) lines.push(`PROCEDIMENTOS: ${value.join(', ')}`);
+            if (groups.procedimentos.includes('Outro') && groups.procedimentos_outro) value.push(groups.procedimentos_outro[0]);
+            if (value.length > 0) lines.push(`PROCEDIMENTOS: ${value.join(', ')}`);
         }
 
 
-        // Bloco 4: Observações
+        // Bloco 4
         let observacoes = [];
         if (groups.pele_alteracao) observacoes.push(`- ${groups.pele_alteracao[0]} (sobre a alteração na pele)`);
         if (groups.rosto_disfarcar) observacoes.push(`- ${groups.rosto_disfarcar[0]} (sobre disfarçar)`);
+        if (groups.observacoes) observacoes.push(`- ${groups.observacoes[0]}`);
 
         if (observacoes.length > 0) {
             lines.push('');
             lines.push('OBSERVAÇÕES:');
             lines.push(...observacoes);
         }
-
+        
         lines.push('');
 
-        // Bloco 5: Encerramento
+        // Bloco 5
+        if (groups.suspeita_cartela) {
+             lines.push('Você suspeita e/ou se identifica de alguma cartela específica? Se sim, porque?');
+             lines.push(groups.suspeita_cartela[0]);
+             lines.push('');
+        }
+
         if (groups.primeira_vez) {
             lines.push('É a primeira vez que você faz análise de coloração pessoal?');
             let value = groups.primeira_vez[0];
@@ -1195,22 +1165,6 @@
         if (e.target.name === 'cores_armario' || e.target.name === 'cores_nao_gosta') {
             checkColorConflict();
         }
-    });
-    
-    // Proteção contra Cópia
-    const plagiarismModal = document.getElementById('plagiarismModal');
-    const modalCloseBtn = document.getElementById('modalCloseBtn');
-
-    document.addEventListener('contextmenu', function(e) {
-        if (resultPage.contains(e.target) || e.target.closest('#resultPage')) {
-            return;
-        }
-        e.preventDefault();
-        plagiarismModal.classList.remove('hidden');
-    });
-
-    modalCloseBtn.addEventListener('click', () => {
-        plagiarismModal.classList.add('hidden');
     });
 
     document.addEventListener('DOMContentLoaded', () => {
